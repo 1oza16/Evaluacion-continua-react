@@ -1,0 +1,258 @@
+:root {
+    --bh-black: #121212;
+    --bh-white: #ffffff;
+    --bh-canvas: #f4f2eb;
+    --bh-red: #d92b27;
+    --bh-blue: #1d4ed8;
+    --bh-yellow: #f59e0b;
+    --bh-gray-light: #e5e2d8;
+    --bh-gray-muted: #737373;
+
+    --bh-border: 2px solid #121212;
+    --bh-border-thick: 4px solid #121212;
+    --bh-radius: 0px;
+    
+    --bh-shadow: 4px 4px 0px #121212;
+    --bh-shadow-hover: 7px 7px 0px #121212;
+    
+    --bh-transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), 
+                                    box-shadow 0.15s cubic-bezier(0.16, 1, 0.3, 1),
+                                    background-color 0.15s ease,
+                                    color 0.15s ease;
+}
+
+/* Reset global */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Base */
+body {
+    font-family: "Futura", "Trebuchet MS", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bh-canvas);
+    color: var(--bh-black);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 32px 24px;
+    gap: 2rem;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Encabezado */
+#header {
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.project {
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: var(--bh-black);
+    line-height: 1.1;
+}
+
+.name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--bh-gray-muted);
+    margin-top: 6px;
+}
+
+/* Contenedor principal */
+.game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    background: var(--bh-white);
+    padding: 2.5rem;
+    border: var(--bh-border-thick);
+    border-radius: var(--bh-radius);
+    box-shadow: 8px 8px 0px var(--bh-black);
+    border-left: 12px solid var(--bh-red);
+    position: relative;
+}
+
+@media (min-width: 640px) {
+    .game {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+}
+
+/* Indicador de estado */
+.status {
+    font-size: 1rem;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--bh-white);
+    background: var(--bh-black);
+    padding: 0.75rem 1.25rem;
+    border: var(--bh-border);
+    border-radius: var(--bh-radius);
+    box-shadow: 4px 4px 0px var(--bh-yellow);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+/* Tablero y filas */
+.game-board {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background-color: var(--bh-black);
+    padding: 12px;
+    border: var(--bh-border);
+    box-shadow: var(--bh-shadow);
+}
+
+.board-row {
+    display: flex;
+    gap: 12px;
+}
+
+/* Casillas */
+.square {
+    width: 84px;
+    height: 84px;
+    background-color: var(--bh-white);
+    border: var(--bh-border);
+    border-radius: var(--bh-radius);
+    font-size: 2.75rem;
+    font-weight: 900;
+    color: var(--bh-black);
+    cursor: pointer;
+    transition: var(--bh-transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+    user-select: none;
+}
+
+.square:hover {
+    background-color: var(--bh-yellow);
+    transform: translate(-3px, -3px);
+    box-shadow: var(--bh-shadow);
+}
+
+.square:active {
+    transform: translate(0, 0);
+    box-shadow: none;
+    background-color: var(--bh-red);
+    color: var(--bh-white);
+}
+
+/* Estados de foco accesibles */
+.square:focus-visible,
+.game-info button:focus-visible {
+    outline: 3px solid var(--bh-black);
+    outline-offset: 4px;
+}
+
+/* Historial de jugadas */
+.game-info {
+    width: 100%;
+    min-width: 220px;
+}
+
+.game-info ol {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 6px;
+}
+
+.game-info button {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: var(--bh-white);
+    color: var(--bh-black);
+    border: var(--bh-border);
+    border-radius: var(--bh-radius);
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: var(--bh-transition);
+    text-align: left;
+    box-shadow: 3px 3px 0px var(--bh-black);
+    font-family: inherit;
+}
+
+.game-info button:hover {
+    background-color: var(--bh-blue);
+    color: var(--bh-white);
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0px var(--bh-red);
+}
+
+/* Movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .square:hover,
+    .game-info button:hover {
+        transform: none !important;
+    }
+}
+
+/* Adaptación móvil */
+@media (max-width: 640px) {
+    body {
+        padding: 16px;
+        gap: 1.5rem;
+    }
+
+    .project {
+        font-size: 2.2rem;
+    }
+
+    .name {
+        font-size: 1rem;
+    }
+
+    .game {
+        width: 100%;
+        padding: 1.5rem 1rem;
+        box-shadow: 5px 5px 0px var(--bh-black);
+        border-left-width: 8px;
+        gap: 1.5rem;
+    }
+
+    .square {
+        width: 72px;
+        height: 72px;
+        font-size: 2.25rem;
+    }
+
+    .game-board {
+        gap: 8px;
+        padding: 8px;
+    }
+
+    .board-row {
+        gap: 8px;
+    }
+
+    .game-info ol {
+        max-height: 280px;
+    }
+}
